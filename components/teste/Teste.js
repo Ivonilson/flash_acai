@@ -3,7 +3,7 @@ import { Modal, TouchableOpacity, View, Text, TextInput, StyleSheet } from 'reac
 import { Picker } from '@react-native-picker/picker';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const Teste = () => {
+export default function Teste (props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedValue, setSelectedValue] = useState('');
 
@@ -135,4 +135,3 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Teste;

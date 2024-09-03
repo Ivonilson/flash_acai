@@ -65,5 +65,5 @@ yarn-error.log
 # testing
 /coverage
 
-#api
+#apis
 /api

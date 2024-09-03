@@ -66,4 +66,10 @@ yarn-error.log
 /coverage
 
 #apis
+<<<<<<< HEAD
 /api
+=======
+/api
+
+
+>>>>>>> validacao_usuario

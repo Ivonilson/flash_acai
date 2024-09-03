@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+/*import { StyleSheet } from 'react-native';*/
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 

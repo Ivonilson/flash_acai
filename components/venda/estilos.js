@@ -47,16 +47,12 @@ const estilos = StyleSheet.create({
         width: '100%'
 
     },
-    input: {
-        width: '100%',
-        borderBottomWidth: 1,
-        marginBottom: 20,
-        padding: 10,
-    },
     picker: {
         height: 50,
         width: '100%',
         marginBottom: 20,
+        textAlign: 'center',
+        fontWeight: 'bold',
     },
     saveButton: {
         backgroundColor: 'purple',
@@ -73,18 +69,33 @@ const estilos = StyleSheet.create({
     cancelButton: {
         padding: 10,
         borderRadius: 5,
+        borderWidth: 2,
+        borderColor: 'red',
+        width: '50%',
+        marginBottom: 10
     },
     cancelButtonText: {
         fontSize: 16,
         color: 'red',
+        textAlign: 'center',
+        fontWeight: 'bold',
     },
     input: {
-        borderColor: 'purple',
-        borderWidth: 1,
+        borderColor: 'black',
+        borderWidth: 0.5,
         height: 50,
-        width: '50%',
-        marginBottom: 20,
+        width: '100%',
+        marginBottom: 10,
         textAlign: 'center'
+    },
+    textoInput: {
+        marginBottom: 5,
+        fontSize: 16,
+        textAlign: 'left',
+        //borderWidth: 2,
+        //borderColor: 'red',
+        width: '100%',
+        fontWeight: 'bold'
     }
 });
 

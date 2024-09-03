@@ -3,7 +3,7 @@ import { TouchableOpacity, Text, View, Modal, TextInput, Alert } from 'react-nat
 import estilos from './estilos';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Picker } from '@react-native-picker/picker';
-const api = require('../../api/api');
+const api = require('../api/api');
 
 console.log(api.produtos())
 

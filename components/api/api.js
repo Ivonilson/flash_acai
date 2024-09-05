@@ -8,4 +8,9 @@ function produtos(){
     return produtos
 }
 
-module.exports = {login, produtos}
+function cadVenda() {
+    const venda = 'https://abgsolucoes.tec.br/api/venda.php'
+    return venda
+}
+
+module.exports = {login, produtos, cadVenda}

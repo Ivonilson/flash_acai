@@ -63,6 +63,11 @@ export default function Venda (props) {
         }
       };
 
+      const mostraValor = () => {
+        const valor =selectedValueProduto
+        console.log('produto: ' + selectedValueProduto + ' quant: ' + selectedValueQuant + ' Responsavel: ' + username)
+      }
+
     const handleLogin = async () => {
         //console.log(typeof username, username);
         //console.log(typeof password, password);
@@ -191,7 +196,7 @@ export default function Venda (props) {
             
                         </Picker>
                         
-                        <TouchableOpacity style={estilos.saveButton} onPress={handleCadastrarVenda}>
+                        <TouchableOpacity style={estilos.saveButton} onPress={mostraValor}>
                             <Text style={estilos.saveButtonText}>Gravar</Text>
                         </TouchableOpacity>
                          <TouchableOpacity style={estilos.cancelButton} onPress={() => {setModalVisibleLancarItem(false), setSelectedValueProduto(''), setSelectedValueQuant('')} }>

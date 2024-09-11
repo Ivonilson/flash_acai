@@ -30,7 +30,7 @@ const estilos = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.5)', // Fundo semitransparente
     },
     modalContent: {
-        width: '80%',
+        width: '90%',
         padding: 20,
         backgroundColor: 'white',
         borderRadius: 10,
@@ -39,7 +39,6 @@ const estilos = StyleSheet.create({
     modalTitle: {
         fontSize: 20,
         fontWeight: 'bold',
-        marginBottom: 20,
     },
     modalProduto: {
         textAlign: 'left',
@@ -72,7 +71,7 @@ const estilos = StyleSheet.create({
         borderWidth: 2,
         borderColor: 'red',
         width: '50%',
-        marginBottom: 10
+        marginBottom: 20
     },
     cancelButtonText: {
         fontSize: 16,

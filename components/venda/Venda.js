@@ -37,11 +37,30 @@ export default function Venda (props) {
         setModalVisibleLogin(true);
     };
 
-    const handleSave = () => {
-        // Lógica para salvar os dados do formulário
-        //console.log(`Valor do campo: ${inputValue}`);
-        //console.log(`Valor selecionado: ${selectedValue}`);
-        setModalVisible(false); // Fecha o modal após salvar
+    const handleCadastrarVenda = async () => {
+        try {
+            const data = {
+                cod_produto: codigo_produto,
+                produto: selectedValueProduto,
+                quantidade: selectedValueQuant,
+                usuario: username
+            }
+
+            const response = await fetch(api.cadVenda, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+
+            if (response.ok) {
+                const result = await response.json()
+                alert('Venda gravada com sucesso!', result)
+            }
+        } catch(error) {
+                alert('Erro: ', error)
+        }
       };
 
     const handleLogin = async () => {
@@ -97,8 +116,8 @@ export default function Venda (props) {
                 <Icon name="edit" size={50} align='center' color="purple" style={{ marginLeft: 70 }} />
                 <Text style={estilos.buttonText}>Registrar Venda</Text>
             </TouchableOpacity>
-
-            <Modal
+           
+            <Modal  // Modal de Autenticação de usuário
                 animationType ="slide"
                 transparent={true}
                 visible={modalVisibleLogin}
@@ -107,24 +126,22 @@ export default function Venda (props) {
 
                 <View style={estilos.modalContainer}>
                     <View style={estilos.modalContent}>
+                    <Text style={estilos.modalTitle}>Autenticação</Text>
                         <Text style={estilos.modalProduto}>Usuário</Text>
-                        <Picker
-                            selectedValue={username}
-                            style={estilos.picker}
-                            onValueChange={(itemValue) => setUsername(itemValue)}
-                        >
-                            <Picker.item label="Selecione" value=""/>
-                            <Picker.item label="user1" value="user1" />
-                            <Picker.item label="user2" value="user2" />
-                        </Picker>
+                        <TextInput 
+                            style={estilos.input}
+                            onChangeText={setUsername}
+                            placeholder = 'Nome do usuário'
+                        />
 
+                        <Text style={estilos.modalProduto}>Senha</Text>
                         <TextInput 
                             style={estilos.input}
                             value={password}
                             onChangeText={setPassword}
                             keyboardType='numeric'
                             secureTextEntry={true}
-                            placeholder = 'digite a senha'
+                            placeholder = 'Senha'
                         />
 
                         <TouchableOpacity style={estilos.saveButton} onPress={handleLogin}>
@@ -137,7 +154,8 @@ export default function Venda (props) {
                 </View>           
             </Modal>
 
-            <Modal
+           
+            <Modal  //Modal de registro de venda
                 animationType="slide"
                 transparent={true}
                 visible={modalVisibleLancarItem}
@@ -145,6 +163,7 @@ export default function Venda (props) {
              >
                 <View style={estilos.modalContainer}>
                     <View style={estilos.modalContent}>
+                        <Text style={estilos.modalTitle}>{username}</Text>
                         <Text style={estilos.modalTitle}>Registrar Venda</Text>
                         <Text style={estilos.textoInput}>Produto</Text>
                         <Picker
@@ -154,7 +173,7 @@ export default function Venda (props) {
                         >
                             <Picker.item label="Selecione" value="-" />
                             {produtos.map((produto) => (
-                                <Picker.item  label={produto.descricao + ' ' + produto.unidade_medida} value={produto.id_prod} key={produto.id_prod} />
+                                <Picker.item  label={produto.id_prod + ' ' + produto.descricao + ' ' + produto.unidade_medida} value={produto.id_prod} key={produto.id_prod} />
                             ))}
                         </Picker>
 
@@ -172,7 +191,7 @@ export default function Venda (props) {
             
                         </Picker>
                         
-                        <TouchableOpacity style={estilos.saveButton} onPress={handleLogin}>
+                        <TouchableOpacity style={estilos.saveButton} onPress={handleCadastrarVenda}>
                             <Text style={estilos.saveButtonText}>Gravar</Text>
                         </TouchableOpacity>
                          <TouchableOpacity style={estilos.cancelButton} onPress={() => {setModalVisibleLancarItem(false), setSelectedValueProduto(''), setSelectedValueQuant('')} }>

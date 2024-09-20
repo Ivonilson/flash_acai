@@ -19,48 +19,8 @@ export default function Teste (props) {
   };
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity style={styles.button} onPress={handlePress}>
-        <Icon name="edit" size={50} color="red" />
-        <Text style={styles.buttonText}>Registrar Venda</Text>
-      </TouchableOpacity>
-
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)} // Fecha o modal ao pressionar 'voltar' no Android
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Venda {1}</Text>
-            <Text style={styles.modalProduto}>Produto</Text>
-            <Picker
-              selectedValue={selectedValue}
-              style={styles.picker}
-              onValueChange={(itemValue) => setSelectedValue(itemValue)}
-            >
-              <Picker.item label="Selecione" value="-" />
-              <Picker.item label="Acai 300 ml" value="Acai 300 ml" />
-              <Picker.item label="Acai 500 ml" value="Acai 500 ml" />
-            </Picker>
-
-            <Text style={styles.modalProduto}>Quantidade</Text>
-            <TextInput
-              style={styles.input}
-              keyboardType='numeric'
-            />
-
-            <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-              <Text style={styles.saveButtonText}>Salvar</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.cancelButton} onPress={() => setModalVisible(false)}>
-              <Text style={styles.cancelButtonText}>Cancelar</Text>
-            </TouchableOpacity>
-          </View>
-          
-        </View>
-      </Modal>
+    <View>
+      
     </View>
   );
 };

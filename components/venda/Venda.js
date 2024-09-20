@@ -18,6 +18,7 @@ export default function Venda (props) {
     const [produtos, setProdutos] = useState([]);
     const [selectedValueProduto, setSelectedValueProduto] = useState('');
     const [selectedValueQuant, setSelectedValueQuant] = useState('');
+    const [inputValue, setInputValue] = useState('');
 
     useEffect(() => {
         const fetchProdutos = async () => {
@@ -40,9 +41,10 @@ export default function Venda (props) {
     const handleCadastrarVenda = async () => {
         try {
             const data = {
-                cod_produto: codigo_produto,
                 produto: selectedValueProduto,
                 quantidade: selectedValueQuant,
+                valor_unitario: inputValorUnitario,
+                valor_total: quantidade * valor_unitario,
                 usuario: username
             }
 
@@ -64,7 +66,7 @@ export default function Venda (props) {
       };
 
       const mostraValor = () => {
-        const valor =selectedValueProduto
+        //const valor =selectedValueProduto
         console.log('produto: ' + selectedValueProduto + ' quant: ' + selectedValueQuant + ' Responsavel: ' + username)
       }
 
@@ -133,11 +135,15 @@ export default function Venda (props) {
                     <View style={estilos.modalContent}>
                     <Text style={estilos.modalTitle}>Autenticação</Text>
                         <Text style={estilos.modalProduto}>Usuário</Text>
-                        <TextInput 
-                            style={estilos.input}
-                            onChangeText={setUsername}
-                            placeholder = 'Nome do usuário'
-                        />
+                        <Picker
+                            selectedValue={username}
+                            style={estilos.picker}
+                            onValueChange={(itemValue) => setUsername(itemValue)}
+                        >
+                           <Picker.Item label="Selecione" value="-" />   
+                           <Picker.Item label="Fulano" value="Fulano" /> 
+                           <Picker.Item label="Sicrano" value="Sicrano" /> 
+                        </Picker>
 
                         <Text style={estilos.modalProduto}>Senha</Text>
                         <TextInput 
@@ -152,7 +158,7 @@ export default function Venda (props) {
                         <TouchableOpacity style={estilos.saveButton} onPress={handleLogin}>
                             <Text style={estilos.saveButtonText}>Continuar</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={estilos.cancelButton} onPress={() => {setModalVisibleLogin(false), setPassword('')} }>
+                        <TouchableOpacity style={estilos.cancelButton} onPress={() => {setModalVisibleLogin(false), setPassword(''), setUsername('')} }>
                             <Text style={estilos.cancelButtonText}>Cancelar</Text>
                         </TouchableOpacity>
                     </View>
@@ -176,9 +182,9 @@ export default function Venda (props) {
                             style={estilos.picker}
                             onValueChange={(itemValue) => setSelectedValueProduto(itemValue)}
                         >
-                            <Picker.item label="Selecione" value="-" />
+                            <Picker.Item label="Selecione" value="-" />
                             {produtos.map((produto) => (
-                                <Picker.item  label={produto.id_prod + ' ' + produto.descricao + ' ' + produto.unidade_medida} value={produto.id_prod} key={produto.id_prod} />
+                                <Picker.Item  label={produto.id_prod + ' ' + produto.descricao + ' (' + produto.preco_unitario + ')' } value={produto.id_prod} key={produto.id_prod} />
                             ))}
                         </Picker>
 
@@ -188,18 +194,18 @@ export default function Venda (props) {
                             style={estilos.picker}
                             onValueChange={(itemValue) => setSelectedValueQuant(itemValue)}
                         >
-                            <Picker.item label="Selecione" value="-" />
+                            <Picker.Item label="Selecione" value="-" />
                             
                             {[...Array(30).keys()].slice(1).map((index) => (
-                                 <Picker.item  label={`${index}`} value={index} key={index} />
+                                 <Picker.Item label={`${index}`} value={index} key={index} />
                             ))}
             
                         </Picker>
                         
-                        <TouchableOpacity style={estilos.saveButton} onPress={mostraValor}>
+                        <TouchableOpacity style={estilos.saveButton} onPress={handleCadastrarVenda}>
                             <Text style={estilos.saveButtonText}>Gravar</Text>
                         </TouchableOpacity>
-                         <TouchableOpacity style={estilos.cancelButton} onPress={() => {setModalVisibleLancarItem(false), setSelectedValueProduto(''), setSelectedValueQuant('')} }>
+                         <TouchableOpacity style={estilos.cancelButton} onPress={() => {setModalVisibleLancarItem(false), setSelectedValueProduto(''), setSelectedValueQuant(''), setUsername(''), setPassword('')} }>
                             <Text style={estilos.cancelButtonText}>Cancelar</Text>
                         </TouchableOpacity>
                     </View>

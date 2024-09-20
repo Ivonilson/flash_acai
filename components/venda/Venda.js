@@ -205,7 +205,11 @@ export default function Venda (props) {
                         <TouchableOpacity style={estilos.saveButton} onPress={handleCadastrarVenda}>
                             <Text style={estilos.saveButtonText}>Gravar</Text>
                         </TouchableOpacity>
+<<<<<<< HEAD
                          <TouchableOpacity style={estilos.cancelButton} onPress={() => {setModalVisibleLancarItem(false), setSelectedValueProduto(''), setSelectedValueQuant(''), setUsername(''), setPassword('')} }>
+=======
+                         <TouchableOpacity style={estilos.cancelButton} onPress={() => {setModalVisibleLancarItem(false), setSelectedValueProduto(''), setSelectedValueQuant(''), setProdutos} }>
+>>>>>>> bba18f0e660c3d2cc2cff904e22c90c40f8fcb66
                             <Text style={estilos.cancelButtonText}>Cancelar</Text>
                         </TouchableOpacity>
                     </View>

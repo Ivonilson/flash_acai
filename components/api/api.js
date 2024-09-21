@@ -13,4 +13,9 @@ function cadVenda() {
     return venda
 }
 
-module.exports = {login, produtos, cadVenda}
+function precoProdutoId(id_prod) {
+    const precoProduto = `https://abgsolucoes.tec.br/api/preco_produto_id.php?id_prod=${id_prod}`
+    return precoProduto
+}
+
+module.exports = { login, produtos, cadVenda, precoProdutoId }

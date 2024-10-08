@@ -16,7 +16,7 @@ export default function Venda(props) {
     const [password, setPassword] = useState('');
 
     const [produtos, setProdutos] = useState([]);
-    const [selectedValueProduto, setSelectedValueProduto] = useState('');
+    const [selectedCodProduto, setSelectedCodProduto] = useState('');
     const [selectedValueQuant, setSelectedValueQuant] = useState('');
 
     useEffect(() => {
@@ -37,36 +37,50 @@ export default function Venda(props) {
         setModalVisibleLogin(true);
     };
 
-    const handleCadastrarVenda = async () => {
-        try {
-            const data = {
-                produto: selectedValueProduto,
-                quantidade: selectedValueQuant,
-                preco: precoProdId,
-                valor_total: quantidade * valor_unitario,
-                usuario: username
-            }
+    const cadastrarVenda = async () => {
+        if(selectedCodProduto != '' && selectedValueQuant != '') {
+            const precoUnitario = await valorUnitario()
+            if (precoUnitario) {
+                try {
+                    const data = {
+                        cod_produto: selectedCodProduto,
+                        quantidade: selectedValueQuant,
+                        preco: precoUnitario,
+                        valor_total: selectedValueQuant * precoUnitario,
+                        usuario: username
+                    }
 
-            const response = await fetch(api.cadVenda, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
+                    const response = await fetch(api.cadVenda(), {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
 
-            if (response.ok) {
-                const result = await response.json()
-                alert('Venda gravada com sucesso!', result)
+                    if (response.ok) {
+                        const result = await response.json()
+                        Alert.alert('OK', 'Venda gravada com sucesso!')
+                        console.log(result)
+                        setSelectedCodProduto('')
+                        setSelectedValueQuant('')
+                    } else {
+                        alert('Erro fora do catch: ', result)
+                    }
+                } catch (error) {
+                    //alert('Erro no catch: ', error)
+                    console.log(error)
+                }
             }
-        } catch (error) {
-            alert('Erro: ', error)
+        } else {
+            Alert.alert('Erro', 'Um produto e uma quantidade são obrigatórios.')
         }
+        
     };
 
     const valorUnitario = async () => {
         try {
-            const response = await fetch(api.precoProdutoId(selectedValueProduto));
+            const response = await fetch(api.precoProdutoId(selectedCodProduto));
             const data = await response.json();
             //console.log('ok')
             return data.preco_unitario
@@ -78,14 +92,14 @@ export default function Venda(props) {
     const mostraValor = async () => {
         //const valor =selectedValueProduto
         const preco_unitario = await valorUnitario()
-        console.log('produto: ' + selectedValueProduto + ' quant: ' + selectedValueQuant + ' Preço unitário: ' + preco_unitario + ' Responsavel: ' + username)
+        console.log('produto: ' + selectedCodProduto + ' quant: ' + selectedValueQuant + ' Preço unitário: ' + preco_unitario + ' Responsavel: ' + username)
     }
 
     const handleLogin = async () => {
         //console.log(typeof username, username);
         //console.log(typeof password, password);
 
-        const loginData = { username, password }
+        const loginData = {password }
         //console.log(typeof loginData, loginData)
 
         try {
@@ -106,6 +120,9 @@ export default function Venda(props) {
 
             const text = await response.text()
             console.log('Response text: ', text)
+            const objUser = JSON.parse(text)
+            const usuario = objUser.data[0].user
+            setUsername(usuario)
 
             try {
                 const data = JSON.parse(text)
@@ -116,7 +133,7 @@ export default function Venda(props) {
                     setModalVisibleLogin(false)
                     setModalVisibleLancarItem(true)
                 } else {
-                    Alert.alert('Erro', data.error || 'Usuário ou senha inválidos.');
+                    Alert.alert('Erro', data.error || 'Senha inválida!');
                 }
             } catch (error) {
                 Alert.alert('Erro', 'Resposta inválida do servidor: ' + error.message);
@@ -145,18 +162,9 @@ export default function Venda(props) {
                 <View style={estilos.modalContainer}>
                     <View style={estilos.modalContent}>
                         <Text style={estilos.modalTitle}>Autenticação</Text>
-                        <Text style={estilos.modalProduto}>Usuário</Text>
-                        <Picker
-                            selectedValue={username}
-                            style={estilos.picker}
-                            onValueChange={(itemValue) => setUsername(itemValue)}
-                        >
-                            <Picker.Item label="Selecione" value="-" />
-                            <Picker.Item label="Fulano" value="Fulano" />
-                            <Picker.Item label="Sicrano" value="Sicrano" />
-                        </Picker>
+                       
 
-                        <Text style={estilos.modalProduto}>Senha</Text>
+                
                         <TextInput
                             style={estilos.input}
                             value={password}
@@ -169,7 +177,7 @@ export default function Venda(props) {
                         <TouchableOpacity style={estilos.saveButton} onPress={handleLogin}>
                             <Text style={estilos.saveButtonText}>Continuar</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={estilos.cancelButton} onPress={() => { setModalVisibleLogin(false), setPassword(''), setUsername('') }}>
+                        <TouchableOpacity style={estilos.cancelButton} onPress={() => { setModalVisibleLogin(false), setPassword('') }}>
                             <Text style={estilos.cancelButtonText}>Cancelar</Text>
                         </TouchableOpacity>
                     </View>
@@ -189,9 +197,9 @@ export default function Venda(props) {
                         <Text style={estilos.modalTitle}>Registrar Venda</Text>
                         <Text style={estilos.textoInput}>Produto</Text>
                         <Picker
-                            selectedValue={selectedValueProduto}
+                            selectedValue={selectedCodProduto}
                             style={estilos.picker}
-                            onValueChange={(itemValue) => setSelectedValueProduto(itemValue)}
+                            onValueChange={(itemValue) => setSelectedCodProduto(itemValue)}
                         >
                             <Picker.Item label="Selecione" value="-" />
                             {produtos.map((produto) => (
@@ -213,10 +221,10 @@ export default function Venda(props) {
 
                         </Picker>
 
-                        <TouchableOpacity style={estilos.saveButton} onPress={mostraValor}>
+                        <TouchableOpacity style={estilos.saveButton} onPress={cadastrarVenda}>
                             <Text style={estilos.saveButtonText}>Gravar</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={estilos.cancelButton} onPress={() => { setModalVisibleLancarItem(false), setSelectedValueProduto(''), setSelectedValueQuant(''), setUsername(''), setPassword('') }}>
+                        <TouchableOpacity style={estilos.cancelButton} onPress={() => { setModalVisibleLancarItem(false), setSelectedCodProduto(''), setSelectedValueQuant(''), setPassword('') }}>
                             <Text style={estilos.cancelButtonText}>Cancelar</Text>
                         </TouchableOpacity>
                     </View>

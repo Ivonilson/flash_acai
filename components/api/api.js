@@ -8,6 +8,11 @@ function produtos(){
     return produtos
 }
 
+function ultimasVendas(){
+    const vendas = 'https://abgsolucoes.tec.br/api/ultimasVendas.php'
+    return vendas
+}
+
 function cadVenda() {
     const venda = 'https://abgsolucoes.tec.br/api/venda.php'
     return venda
@@ -18,4 +23,4 @@ function precoProdutoId(id_prod) {
     return precoProduto
 }
 
-module.exports = { login, produtos, cadVenda, precoProdutoId }
+module.exports = { login, produtos, ultimasVendas, cadVenda, precoProdutoId }

@@ -22,6 +22,15 @@ export default function UltimasVendas(props) {
         fetchVendas()
     }, [])
 
+    function formatarData(data) {
+        const dataobj = new Date(data)
+        const dia = String(dataobj.getDate() + 1).padStart(2, '0');  // Obtém o dia e garante que tenha dois dígitos
+        const mes = String(dataobj.getMonth() + 1).padStart(2, '0');  // Obtém o mês (adiciona +1 porque janeiro é 0)
+        const ano = dataobj.getFullYear();  // Obtém o ano
+
+        return `${dia}/${mes}/${ano}`;
+    }
+
     return (
 
         <View style={estilos.container}>
@@ -35,7 +44,7 @@ export default function UltimasVendas(props) {
 
                             renderItem={({item}) => 
                                 <View>
-                                    <Text>Nome: {venda.id_prod} - Data: {venda.data_registro} - Vendedor: {venda.usuario}</Text>
+                                    <Text>Nome: {venda.id_prod} - Data: {formatarData(venda.data_registro)} - Vendedor: {venda.usuario}</Text>
                                 </View>
                             }
                         

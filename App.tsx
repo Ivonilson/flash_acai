@@ -37,6 +37,11 @@ export default function App() {
         />   
         
         <Tabs.Screen name="Últimas" component={UltimasVendas}
+            listeners={({navigation}) => ({
+                tabPress: (e) => {
+                navigation.navigate('UltimasVendas', {key: Math.random().toString()});
+                 }
+             })}
             options={{
               tabBarLabelStyle: { fontSize: 20, color: "purple" },
                 tabBarIcon: () => (

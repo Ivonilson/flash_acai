@@ -28,9 +28,9 @@ export default function Produtos (props) {
 
       {produtos.map((produto) => (
         <FlatList 
-          data={[
+          data={
             {key: produto.id_prod}
-          ]}
+          }
           renderItem={({ item }) => 
           <View>
               <Text style={estilos.produtos}>{produto.descricao} - R$ {produto.preco_unitario}</Text>

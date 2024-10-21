@@ -39,7 +39,8 @@ export default function App() {
         <Tabs.Screen name="Últimas" component={UltimasVendas}
             listeners={({navigation}) => ({
                 tabPress: (e) => {
-                navigation.navigate('UltimasVendas', {key: Math.random().toString()});
+                  
+                  navigation.navigate('UltimasVendas', {key: Math.random().toString()});
                  }
              })}
             options={{

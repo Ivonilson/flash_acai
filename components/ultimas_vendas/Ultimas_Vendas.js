@@ -1,5 +1,6 @@
-import {React, useEffect, useState} from "react";
+import {React, useCallback, useState} from "react";
 import { ScrollView, View, Text, FlatList } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import estilos from './estilos';
 const api = require('../api/api')
 
@@ -8,7 +9,9 @@ export default function UltimasVendas(props) {
 
     const [vendas, setVendas] = useState([]) 
 
-    useEffect(() => {
+    useFocusEffect(
+        useCallback(() => {
+
         const fetchVendas = async () => {
             try {
                 const response = await fetch(api.ultimasVendas())
@@ -20,7 +23,8 @@ export default function UltimasVendas(props) {
             }
         }
         fetchVendas()
-    }, [])
+    }, [props.route.params?.key])
+    )
 
     function formatarData(data) {
         const dataobj = new Date(data)

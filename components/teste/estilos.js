@@ -17,11 +17,24 @@ const estilos = StyleSheet.create({
         textAlign: 'center'
     },
     produtos: {
-        fontSize: 25,
+        fontSize: 18,
         color: 'white',
-        textAlign: 'center',
+        textAlign: 'left',
         marginTop: 10,
+        marginStart: 5,
         fontWeight: 'bold'
+    },
+    precoItem: {
+        fontSize: 22,
+        color: 'white',
+        marginStart: 5,
+        textAlign: 'left'
+    },
+    qtdEstoque: {
+        fontSize: 15,
+        color: 'white',
+        marginStart: 5,
+        textAlign: 'left'
     }
 });
 

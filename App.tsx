@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import TelaInicial from './components/tela_inicial/Tela_Inicial';
 import Venda from  './components/venda/Venda';
-import UltimasVendas from './components/ultimas_vendas/Ultimas_Vendas';
+import Hoje from './components/hoje/Hoje';
 import Produtos from './components/teste/Produtos';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -36,11 +36,11 @@ export default function App() {
             }}
         />   
         
-        <Tabs.Screen name="Últimas" component={UltimasVendas}
+        <Tabs.Screen name="Hoje" component={Hoje}
             listeners={({navigation}) => ({
                 tabPress: (e) => {
                   
-                  navigation.navigate('UltimasVendas', {key: Math.random().toString()});
+                  navigation.navigate('Hoje', {key: Math.random().toString()});
                  }
              })}
             options={{

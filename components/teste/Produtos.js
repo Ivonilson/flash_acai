@@ -25,20 +25,18 @@ export default function Produtos (props) {
 
   return (
     <ScrollView style={estilos.viewPrincipal}>
-
-      {produtos.map((produto) => (
         <FlatList 
-          data={
-            {key: produto.id_prod}
-          }
-          renderItem={({ item }) => 
+          data={produtos}
+          keyExtractor={(item) => item.id_prod.toString()}
+          renderItem={({item}) => 
           <View>
-              <Text style={estilos.produtos}>{produto.descricao} - R$ {produto.preco_unitario}</Text>
-              <Image source={Img_acai} style={{width: 100, height: 100}}/>          
+              <Text style={estilos.produtos}>{item.descricao}</Text>
+              <Text style={estilos.precoItem}>R$ {item.preco_unitario}</Text>
+              <Text style={estilos.qtdEstoque}>Estoque: {item.quantidade_estoque}</Text>
+         
           </View>
         }
         />
-      ))}
     </ScrollView>
   );
 };

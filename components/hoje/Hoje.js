@@ -37,22 +37,26 @@ export default function Hoje(props) {
         const segundos = dataobj.getSeconds();
 
         return `${hora}h${minutos}m${segundos}s'`
+    
     }
 
     return (
 
         <View style={estilos.container}>
             <ScrollView style={estilos.scrollView}>
-                {vendas.length > 0 && <Text>Total em vendas do dia (R$){vendas[0].total.toFixed(2)}</Text>}
+                <Text style={estilos.dataAtual}>Brasília, {new Date().toLocaleDateString()}.</Text>
+                {vendas.length > 0 ? <Text style={estilos.total}>Total de vendas no dia (R$): {vendas[0].total.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</Text> : <Text style={estilos.nenhumRegistro}>Nenhum registro até o momento.</Text>}
                         <FlatList 
                             data = {vendas}
                             keyExtractor={(item) => item.id_prod.toString()}
                             renderItem={({item}) => 
                                 <View>
-                                    <Text>{item.quant} {item.descricao} - R${item.valor_total.toFixed(2)} - {formatarData(item.data_registro)} - {item.usuario}</Text>
+                                    <Text style={estilos.itens}>{item.descricao} ({item.quant}) - R${item.valor_total.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})} - {formatarData(item.data_registro)} - {item.usuario}</Text>
+                                    <View style={estilos.linha}></View>
                                 </View>
                             }
                         />
+                {vendas.length > 0 && <Text style={estilos.total}></Text>}
             </ScrollView>
         </View>
     )

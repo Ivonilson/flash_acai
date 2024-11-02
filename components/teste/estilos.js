@@ -8,7 +8,8 @@ const estilos = StyleSheet.create({
         backgroundColor: 'purple'
     },
     viewPrincipal: {
-        backgroundColor: 'purple'
+        backgroundColor: 'purple',
+        paddingLeft: 5
     }, 
     titulo: {
         fontSize: 35,

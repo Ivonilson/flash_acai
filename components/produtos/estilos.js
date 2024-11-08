@@ -9,7 +9,9 @@ const estilos = StyleSheet.create({
     },
     viewPrincipal: {
         backgroundColor: 'purple',
-        paddingLeft: 5
+        paddingLeft: 5,
+        marginStart: 5,
+        marginEnd: 5
     }, 
     titulo: {
         fontSize: 35,

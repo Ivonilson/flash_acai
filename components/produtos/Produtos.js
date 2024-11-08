@@ -24,8 +24,8 @@ export default function Produtos (props) {
   }, [])
 
   return (
-    <ScrollView style={estilos.viewPrincipal}>
         <FlatList 
+          style={estilos.viewPrincipal}
           data={produtos}
           keyExtractor={(item) => item.id_prod.toString()}
           renderItem={({item}) => 
@@ -37,7 +37,6 @@ export default function Produtos (props) {
           </View>
         }
         />
-    </ScrollView>
   );
 };
 

@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import TelaInicial from './components/tela_inicial/Tela_Inicial';
 import Venda from  './components/venda/Venda';
 import Hoje from './components/hoje/Hoje';
-import Produtos from './components/teste/Produtos';
+import Produtos from './components/produtos/Produtos';
 import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {

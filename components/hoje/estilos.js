@@ -3,8 +3,10 @@ import { StyleSheet } from "react-native";
 const estilos = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F8F8FF',
-        alignItems: 'center'
+        backgroundColor: 'purple',
+        alignItems: 'center',
+        paddingTop: 3,       marginStart: 5,
+        marginEnd: 5
     },
     scrollView: {
         //borderWidth: 1,
@@ -14,7 +16,7 @@ const estilos = StyleSheet.create({
         marginStart: 5,
         marginEnd: 5,
         backgroundColor: 'purple',
-        padding: 10
+        padding: 10,
     },
     texto: {
         fontSize: 20,

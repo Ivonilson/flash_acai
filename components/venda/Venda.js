@@ -140,7 +140,7 @@ export default function Venda(props) {
             }
 
         } catch (error) {
-            Alert.alert('Erro', 'Houve um problema ao tentar realizar o login: ' + error.message);
+            Alert.alert('Erro', 'Houve um problema ao tentar realizar o login. Verifique a senha e tente novamente ou contate o suporte');
             console.log(error.message)
         }
     }
@@ -203,7 +203,7 @@ export default function Venda(props) {
                         >
                             <Picker.Item label="Selecione" value="-" />
                             {produtos.map((produto) => (
-                                <Picker.Item label={produto.id_prod + ' ' + produto.descricao + ' (' + produto.preco_unitario + ')'} value={produto.id_prod} key={produto.id_prod} />
+                                <Picker.Item style={estilos.picker_prod} label={produto.descricao + ' (' + produto.preco_unitario + ')'} value={produto.id_prod} key={produto.id_prod} />
                             ))}
                         </Picker>
 

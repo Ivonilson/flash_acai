@@ -43,21 +43,20 @@ export default function Hoje(props) {
     return (
 
         <View style={estilos.container}>
-            <ScrollView style={estilos.scrollView}>
-                <Text style={estilos.dataAtual}>Brasília, {new Date().toLocaleDateString()}.</Text>
-                {vendas.length > 0 ? <Text style={estilos.total}>Total de vendas no dia (R$): {vendas[0].total.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</Text> : <Text style={estilos.nenhumRegistro}>Nenhum registro até o momento.</Text>}
+                <Text style={estilos.dataAtual}>{new Date().toLocaleDateString()}.</Text>
+                {vendas.length > 0 ? <Text style={estilos.total}>Total de vendas no dia: {vendas[0].total.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</Text> : <Text style={estilos.nenhumRegistro}>Nenhum registro até o momento.</Text>}
                         <FlatList 
+                            style={estilos.scrollView}
                             data = {vendas}
-                            keyExtractor={(item) => item.id_prod.toString()}
+                            keyExtractor={(item) => item.cod_venda.toString()}
                             renderItem={({item}) => 
                                 <View>
-                                    <Text style={estilos.itens}>{item.descricao} ({item.quant}) - R${item.valor_total.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})} - {formatarData(item.data_registro)} - {item.usuario}</Text>
+                                    <Text style={estilos.itens}>{item.descricao} ({item.quant}) - {item.valor_total.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})} - {formatarData(item.data_registro)} - {item.usuario}</Text>
                                     <View style={estilos.linha}></View>
                                 </View>
                             }
                         />
                 {vendas.length > 0 && <Text style={estilos.total}></Text>}
-            </ScrollView>
         </View>
     )
 

@@ -7,7 +7,8 @@ const estilos = StyleSheet.create({
         //flexWrap: 'wrap',
         justifyContent: 'center',
         alignItems: 'center',
-        Margin: 4,
+        marginStart: 5,
+        marginEnd: 5,
         backgroundColor: 'purple'
     },
     button: {
